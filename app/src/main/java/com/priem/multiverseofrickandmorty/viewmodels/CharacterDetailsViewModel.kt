@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.priem.multiverseofrickandmorty.model.characterdetails.CharacterDetails
 import com.priem.multiverseofrickandmorty.repository.CharacterDetailsRepository
+import com.priem.multiverseofrickandmorty.repository.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -16,6 +17,6 @@ class CharacterDetailsViewModel (private val repository: CharacterDetailsReposit
             }
         }
 
-        val characterDetails : LiveData<CharacterDetails>
+        val characterDetails : LiveData<Response<CharacterDetails>>
         get() = repository.characterDetails
 }

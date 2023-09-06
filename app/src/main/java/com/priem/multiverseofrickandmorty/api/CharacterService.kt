@@ -15,7 +15,4 @@ interface CharacterService {
     @GET("character/{id}")
     suspend fun getCharacterById(@Path("id") characterId: Int): Response<CharacterDetails>
 
-
-
-
 }

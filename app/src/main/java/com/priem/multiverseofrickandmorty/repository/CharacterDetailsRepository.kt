@@ -12,23 +12,36 @@ class CharacterDetailsRepository (private val characterService: CharacterService
                                   private val applicationContext: Context
 ) {
 
-    private val characterDetailsLiveData = MutableLiveData<CharacterDetails>()
+    private val characterDetailsLiveData = MutableLiveData<Response<CharacterDetails>>()
 
-    val characterDetails: LiveData<CharacterDetails>
+    val characterDetails: LiveData<Response<CharacterDetails>>
         get() = characterDetailsLiveData
 
     suspend fun getCharacterDetails(characterId: Int){
+
         if(NetworkUtils.isInternetAvailable(applicationContext)){
-            val result = characterService.getCharacterById(characterId)
-            if(result.body() != null){
-                characterDetailsLiveData.postValue(result.body())
+            try {
+                val result = characterService.getCharacterById(characterId)
+                if(result.body() != null){
+                    characterDetailsLiveData.postValue(Response.Success(result.body()))
+                }
+                else
+                {
+                    characterDetailsLiveData.postValue(Response.Error("API Error"))
+                }
             }
+            catch (e: Exception)
+            {
+                characterDetailsLiveData.postValue(Response.Error(e.message.toString()))
+
+            }
+
         }
         else
         {
-            Log.d("NO_INTERNET","Offline caching will implement later")
+            Log.d("NOINTERNET","Offline caching will implement later")
+            characterDetailsLiveData.postValue(Response.Error("Internet is not available"))
         }
-
 
     }
 
