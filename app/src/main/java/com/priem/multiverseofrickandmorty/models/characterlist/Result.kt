@@ -1,5 +1,9 @@
 package com.priem.multiverseofrickandmorty.models.characterlist
 
+import android.os.Parcel
+import android.os.Parcelable
+
+
 data class Result(
     val created: String,
     val gender: String,

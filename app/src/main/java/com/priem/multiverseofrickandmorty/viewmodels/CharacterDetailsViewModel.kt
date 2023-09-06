@@ -11,9 +11,12 @@ import kotlinx.coroutines.launch
 
 class CharacterDetailsViewModel (private val repository: CharacterDetailsRepository) : ViewModel()  {
 
-        init {
+
+
+       fun fetchCharacterDetails(characterId: Int)
+         {
             viewModelScope.launch(Dispatchers.IO){
-                repository.getCharacterDetails(1)
+                repository.getCharacterDetails(characterId)
             }
         }
 
