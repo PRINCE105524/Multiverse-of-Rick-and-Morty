@@ -47,85 +47,151 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:padding="6dp"
-                android:text="Name"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/teal_200"
-                android:textIsSelectable="false"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/image" />
 
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:padding="6dp"
-                android:text="Status"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/name" />
+                app:layout_constraintTop_toBottomOf="@id/image"
+                android:stretchColumns="1">
 
-            <TextView
-                android:id="@+id/species"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:padding="6dp"
-                android:text="Species"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/status" />
+                <TableRow>
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="BIOGRAPHICAL INFO"
+                        android:gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:padding="8dp" />
 
-            <TextView
-                android:id="@+id/gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:padding="6dp"
-                android:text="Gender"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/species" />
+                </TableRow>
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:padding="6dp"
-                android:text="Location"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/gender" />
+                <TableRow>
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="NAME"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp" />
 
-            <TextView
-                android:id="@+id/origin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:padding="6dp"
-                android:text="Origin"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/image"
-                app:layout_constraintTop_toBottomOf="@id/location" />
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:id="@+id/nameValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rick Sanchez"
+                        android:padding="8dp" />
+
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="STATUS"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:id="@+id/statusValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Alive"
+                        android:padding="8dp" />
+
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SPECIES"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:id="@+id/speciesValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Human"
+                        android:padding="8dp" />
+
+                </TableRow>
+
+
+                <TableRow>
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="GENDER"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:id="@+id/genderValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:padding="8dp" />
+
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="LOCATION"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:id="@+id/locationValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Citadel of Ricks"
+                        android:padding="8dp" />
+
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ORIGIN"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textStyle="bold"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:id="@+id/originValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Earth (C-137)"
+                        android:padding="8dp" />
+
+                </TableRow>
+
+            </TableLayout>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

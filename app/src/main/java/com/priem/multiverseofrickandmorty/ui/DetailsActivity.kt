@@ -1,4 +1,4 @@
-package com.priem.multiverseofrickandmorty
+package com.priem.multiverseofrickandmorty.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.priem.multiverseofrickandmorty.RickyandMortyApplication
 import com.priem.multiverseofrickandmorty.databinding.ActivityDetailsBinding
 import com.priem.multiverseofrickandmorty.model.characterdetails.CharacterDetails
 import com.priem.multiverseofrickandmorty.repository.Response
-import com.priem.multiverseofrickandmorty.viewmodels.CharacterDetailsViewModel
-import com.priem.multiverseofrickandmorty.viewmodels.CharacterDetailsViewModelFactory
+import com.priem.multiverseofrickandmorty.viewmodels.characterdetailsviewmodel.CharacterDetailsViewModel
+import com.priem.multiverseofrickandmorty.viewmodels.characterdetailsviewmodel.CharacterDetailsViewModelFactory
 
 class DetailsActivity : AppCompatActivity() {
     lateinit var binding: ActivityDetailsBinding
@@ -32,7 +33,8 @@ class DetailsActivity : AppCompatActivity() {
     ////characterDetails
     private fun getCharacterDetails(characterId : Int) {
         val repositoryCharacterDetails = (application as RickyandMortyApplication).characterDetailsRepository
-        characterDetailsViewModel = ViewModelProvider(this, CharacterDetailsViewModelFactory(repositoryCharacterDetails)).get(CharacterDetailsViewModel::class.java)
+        characterDetailsViewModel = ViewModelProvider(this, CharacterDetailsViewModelFactory(repositoryCharacterDetails)).get(
+            CharacterDetailsViewModel::class.java)
         characterDetailsViewModel.fetchCharacterDetails(characterId)
         characterDetailsViewModel.characterDetails.observe(this, Observer{
             initCharacterDetails(it)
@@ -55,22 +57,22 @@ class DetailsActivity : AppCompatActivity() {
                         binding.image.load(it.image)
                     }
                     if (it.name != null) {
-                        binding.name.text = "Name: ${it.name}"
+                        binding.nameValue.text = it.name
                     }
                     if (it.status != null) {
-                        binding.status.text = "Status: ${it.status}"
+                        binding.statusValue.text = it.status
                     }
                     if (it.species != null) {
-                        binding.species.text = "Species: ${it.species}"
+                        binding.speciesValue.text = it.species
                     }
                     if (it.gender != null) {
-                        binding.gender.text ="Gender: ${it.gender}"
+                        binding.genderValue.text = it.gender
                     }
                     if (it.location != null) {
-                        binding.location.text ="Location: ${it.location.name}"
+                        binding.locationValue.text = it.location.name
                     }
                     if (it.origin != null) {
-                        binding.origin.text ="Origin: ${it.origin.name}"
+                        binding.originValue.text = it.origin.name
                     }
 
                     Log.d("characterDetails", it.toString()) }

@@ -1,4 +1,4 @@
-package com.priem.multiverseofrickandmorty.viewmodels
+package com.priem.multiverseofrickandmorty.viewmodels.characterdetailsviewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
