@@ -7,7 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.priem.multiverseofrickandmorty.RickyandMortyApplication
 import com.priem.multiverseofrickandmorty.databinding.ActivityDetailsBinding
 import com.priem.multiverseofrickandmorty.model.characterdetails.CharacterDetails
@@ -54,7 +55,10 @@ class DetailsActivity : AppCompatActivity() {
                     //Toast.makeText(this@DetailsActivity, it.name, Toast.LENGTH_LONG).show()
 
                     if (it.image != null) {
-                        binding.image.load(it.image)
+                        Glide.with(this)
+                            .load(it.image)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(binding.image)
                     }
                     if (it.name != null) {
                         binding.nameValue.text = it.name

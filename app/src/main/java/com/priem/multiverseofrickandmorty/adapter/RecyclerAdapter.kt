@@ -5,7 +5,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.priem.multiverseofrickandmorty.ui.DetailsActivity
 import com.priem.multiverseofrickandmorty.R
 import com.priem.multiverseofrickandmorty.databinding.ListItemBinding
@@ -49,7 +50,10 @@ class RecyclerAdapter(private val context: Context, private val characterList: C
 
         fun bind(character: Result?){
             val statusDotResource = getStatusDotResource(character?.status?.lowercase()!!)
-            listItemBinding.image.load(character?.image)
+            Glide.with(listItemBinding.root)
+                .load(character?.image)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(listItemBinding.image)
             listItemBinding.name.text = (character?.name)
             listItemBinding.statusImageView.setImageResource(statusDotResource)
         }
