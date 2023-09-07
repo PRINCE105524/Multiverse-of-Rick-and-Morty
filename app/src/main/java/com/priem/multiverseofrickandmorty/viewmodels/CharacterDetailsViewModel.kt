@@ -12,17 +12,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CharacterDetailsViewModel @Inject constructor(private val repository: CharacterDetailsRepository) : ViewModel()  {
+class CharacterDetailsViewModel @Inject constructor(private val repository: CharacterDetailsRepository) :
+    ViewModel() {
 
 
-        val characterDetails : LiveData<Response<CharacterDetails>>
+    val characterDetails: LiveData<Response<CharacterDetails>>
         get() = repository.characterDetails
-       fun fetchCharacterDetails(characterId: Int)
-         {
-            viewModelScope.launch(Dispatchers.IO){
-                repository.getCharacterDetails(characterId)
-            }
+
+    fun fetchCharacterDetails(characterId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getCharacterDetails(characterId)
         }
+    }
 
 
 }

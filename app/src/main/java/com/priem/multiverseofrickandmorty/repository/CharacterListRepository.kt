@@ -14,44 +14,35 @@ import kotlin.Exception
 class CharacterListRepository @Inject constructor(
     private val characterServiceAPI: CharacterServiceAPI,
     @ApplicationContext private val applicationContext: Context
-    ) {
+) {
 
     private val characterListLiveData = MutableLiveData<Response<CharacterList>>()
 
     val characterList: LiveData<Response<CharacterList>>
         get() = characterListLiveData
 
-    suspend fun getCharacterList(){
+    suspend fun getCharacterList() {
 
-        if(NetworkUtils.isInternetAvailable(applicationContext)){
+        if (NetworkUtils.isInternetAvailable(applicationContext)) {
             try {
                 val result = characterServiceAPI.getCharacterList()
-                if(result.body() != null){
+                if (result.body() != null) {
                     characterListLiveData.postValue(Response.Success(result.body()))
-                }
-                else
-                {
+                } else {
                     characterListLiveData.postValue(Response.Error("API Error"))
                 }
-            }
-            catch (e: Exception)
-            {
+            } catch (e: Exception) {
                 characterListLiveData.postValue(Response.Error(e.message.toString()))
 
             }
 
-        }
-        else
-        {
-            Log.d("NOINTERNET","Offline caching will implement later")
+        } else {
+            Log.d("NOINTERNET", "Offline caching will implement later")
             characterListLiveData.postValue(Response.Error("Internet is not available"))
         }
 
 
-
     }
-
-
 
 
 }

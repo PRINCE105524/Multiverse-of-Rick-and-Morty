@@ -13,10 +13,17 @@ import com.priem.multiverseofrickandmorty.databinding.ListItemBinding
 import com.priem.multiverseofrickandmorty.models.characterlist.CharacterList
 import com.priem.multiverseofrickandmorty.models.characterlist.Result
 
-class RecyclerAdapter(private val context: Context, private val characterList: CharacterList?) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter(private val context: Context, private val characterList: CharacterList?) :
+    RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context),parent, false))
+        return ViewHolder(
+            ListItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -24,7 +31,7 @@ class RecyclerAdapter(private val context: Context, private val characterList: C
         holder.bind(character)
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DetailsActivity::class.java)
-            intent.putExtra("characterId", character?.id);
+            intent.putExtra("characterId", character?.id)
             context.startActivity(intent)
         }
     }
@@ -42,16 +49,15 @@ class RecyclerAdapter(private val context: Context, private val characterList: C
         }
     }
 
-    inner class ViewHolder(var listItemBinding: ListItemBinding): RecyclerView.ViewHolder(listItemBinding.root){
+    inner class ViewHolder(var listItemBinding: ListItemBinding) : RecyclerView.ViewHolder(listItemBinding.root) {
 
-
-        fun bind(character: Result?){
+        fun bind(character: Result?) {
             val statusDotResource = getStatusDotResource(character?.status?.lowercase()!!)
             Glide.with(listItemBinding.root)
-                .load(character?.image)
+                .load(character.image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(listItemBinding.image)
-            listItemBinding.name.text = (character?.name)
+            listItemBinding.name.text = (character.name)
             listItemBinding.statusImageView.setImageResource(statusDotResource)
         }
     }

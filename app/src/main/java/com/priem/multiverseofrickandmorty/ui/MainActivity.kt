@@ -34,18 +34,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter(it: Response<CharacterList>) {
-        when(it)
-        {
+        when (it) {
             is Response.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
             }
+
             is Response.Success -> {
                 if (it.data != null) {
-                    adapter = RecyclerAdapter(this,it.data)
+                    adapter = RecyclerAdapter(this, it.data)
                     binding.recyclerView.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
             }
+
             is Response.Error -> {
                 it.errorMessage
                 binding.progressBar.visibility = View.GONE

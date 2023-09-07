@@ -8,7 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 class NetworkUtils {
 
-    companion object{
+    companion object {
 
         fun isInternetAvailable(@ApplicationContext context: Context): Boolean {
             (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).run {

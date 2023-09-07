@@ -32,21 +32,21 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     ////characterDetails
-    private fun getCharacterDetails(characterId : Int) {
+    private fun getCharacterDetails(characterId: Int) {
         characterDetailsViewModel = ViewModelProvider(this).get(CharacterDetailsViewModel::class.java)
         characterDetailsViewModel.fetchCharacterDetails(characterId)
-        characterDetailsViewModel.characterDetails.observe(this, Observer{
+        characterDetailsViewModel.characterDetails.observe(this, Observer {
             initCharacterDetails(it)
         })
     }
 
     //initialize character details view
     private fun initCharacterDetails(it: Response<CharacterDetails>) {
-        when(it)
-        {
+        when (it) {
             is Response.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
             }
+
             is Response.Success -> {
                 it.data?.let {
                     binding.progressBar.visibility = View.GONE
@@ -75,9 +75,11 @@ class DetailsActivity : AppCompatActivity() {
                         binding.originValue.text = it.origin.name
                     }
 
-                    Log.d("characterDetails", it.toString()) }
+                    Log.d("characterDetails", it.toString())
+                }
 
             }
+
             is Response.Error -> {
                 it.errorMessage
                 binding.progressBar.visibility = View.GONE

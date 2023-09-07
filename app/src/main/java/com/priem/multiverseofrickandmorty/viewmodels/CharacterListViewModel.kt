@@ -13,12 +13,14 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class CharacterListViewModel @Inject constructor(private val repository: CharacterListRepository) : ViewModel()  {
+class CharacterListViewModel @Inject constructor(private val repository: CharacterListRepository) :
+    ViewModel() {
 
-    val characterList : LiveData<Response<CharacterList>>
+    val characterList: LiveData<Response<CharacterList>>
         get() = repository.characterList
+
     init {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getCharacterList()
         }
     }
