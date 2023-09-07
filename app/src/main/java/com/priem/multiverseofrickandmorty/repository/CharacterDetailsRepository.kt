@@ -4,12 +4,14 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.priem.multiverseofrickandmorty.api.CharacterService
+import com.priem.multiverseofrickandmorty.api.CharacterServiceAPI
 import com.priem.multiverseofrickandmorty.model.characterdetails.CharacterDetails
 import com.priem.multiverseofrickandmorty.utils.NetworkUtils
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class CharacterDetailsRepository (private val characterService: CharacterService,
-                                  private val applicationContext: Context
+class CharacterDetailsRepository @Inject constructor (private val characterServiceAPI: CharacterServiceAPI,
+                                                      @ApplicationContext private val applicationContext: Context
 ) {
 
     private val characterDetailsLiveData = MutableLiveData<Response<CharacterDetails>>()
@@ -21,7 +23,7 @@ class CharacterDetailsRepository (private val characterService: CharacterService
 
         if(NetworkUtils.isInternetAvailable(applicationContext)){
             try {
-                val result = characterService.getCharacterById(characterId)
+                val result = characterServiceAPI.getCharacterById(characterId)
                 if(result.body() != null){
                     characterDetailsLiveData.postValue(Response.Success(result.body()))
                 }

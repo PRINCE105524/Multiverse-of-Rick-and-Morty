@@ -2,17 +2,18 @@ package com.priem.multiverseofrickandmorty.repository
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.priem.multiverseofrickandmorty.api.CharacterService
+import com.priem.multiverseofrickandmorty.api.CharacterServiceAPI
 import com.priem.multiverseofrickandmorty.models.characterlist.CharacterList
 import com.priem.multiverseofrickandmorty.utils.NetworkUtils
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlin.Exception
 
-class CharacterListRepository(
-    private val characterService: CharacterService,
-    private val applicationContext: Context
+class CharacterListRepository @Inject constructor(
+    private val characterServiceAPI: CharacterServiceAPI,
+    @ApplicationContext private val applicationContext: Context
     ) {
 
     private val characterListLiveData = MutableLiveData<Response<CharacterList>>()
@@ -24,7 +25,7 @@ class CharacterListRepository(
 
         if(NetworkUtils.isInternetAvailable(applicationContext)){
             try {
-                val result = characterService.getCharacterList()
+                val result = characterServiceAPI.getCharacterList()
                 if(result.body() != null){
                     characterListLiveData.postValue(Response.Success(result.body()))
                 }

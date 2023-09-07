@@ -6,7 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface CharacterService {
+interface CharacterServiceAPI {
     //List of Character
     @GET("character")
     suspend fun getCharacterList() : Response<CharacterList>

@@ -6,14 +6,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.priem.multiverseofrickandmorty.RickyandMortyApplication
 import com.priem.multiverseofrickandmorty.adapter.RecyclerAdapter
 import com.priem.multiverseofrickandmorty.databinding.ActivityMainBinding
 import com.priem.multiverseofrickandmorty.models.characterlist.CharacterList
 import com.priem.multiverseofrickandmorty.repository.Response
-import com.priem.multiverseofrickandmorty.viewmodels.characterlistviewmodel.CharacterListViewModel
-import com.priem.multiverseofrickandmorty.viewmodels.characterlistviewmodel.CharacterListViewModelFactory
+import com.priem.multiverseofrickandmorty.viewmodels.CharacterListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var adapter: RecyclerAdapter
@@ -25,13 +25,9 @@ class MainActivity : AppCompatActivity() {
         getCharacterList()
     }
 
-
     //characterList
     private fun getCharacterList() {
-
-        val repositoryCharacterList = (application as RickyandMortyApplication).characterListRepository
-        characterListViewModel = ViewModelProvider(this, CharacterListViewModelFactory(repositoryCharacterList)).get(
-            CharacterListViewModel::class.java)
+        characterListViewModel = ViewModelProvider(this).get(CharacterListViewModel::class.java)
         characterListViewModel.characterList.observe(this, Observer {
             initAdapter(it)
         })

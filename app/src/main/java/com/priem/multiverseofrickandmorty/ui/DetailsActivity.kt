@@ -9,13 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.priem.multiverseofrickandmorty.RickyandMortyApplication
 import com.priem.multiverseofrickandmorty.databinding.ActivityDetailsBinding
 import com.priem.multiverseofrickandmorty.model.characterdetails.CharacterDetails
 import com.priem.multiverseofrickandmorty.repository.Response
-import com.priem.multiverseofrickandmorty.viewmodels.characterdetailsviewmodel.CharacterDetailsViewModel
-import com.priem.multiverseofrickandmorty.viewmodels.characterdetailsviewmodel.CharacterDetailsViewModelFactory
+import com.priem.multiverseofrickandmorty.viewmodels.CharacterDetailsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
     lateinit var binding: ActivityDetailsBinding
     lateinit var characterDetailsViewModel: CharacterDetailsViewModel
@@ -33,9 +33,7 @@ class DetailsActivity : AppCompatActivity() {
 
     ////characterDetails
     private fun getCharacterDetails(characterId : Int) {
-        val repositoryCharacterDetails = (application as RickyandMortyApplication).characterDetailsRepository
-        characterDetailsViewModel = ViewModelProvider(this, CharacterDetailsViewModelFactory(repositoryCharacterDetails)).get(
-            CharacterDetailsViewModel::class.java)
+        characterDetailsViewModel = ViewModelProvider(this).get(CharacterDetailsViewModel::class.java)
         characterDetailsViewModel.fetchCharacterDetails(characterId)
         characterDetailsViewModel.characterDetails.observe(this, Observer{
             initCharacterDetails(it)
@@ -52,8 +50,6 @@ class DetailsActivity : AppCompatActivity() {
             is Response.Success -> {
                 it.data?.let {
                     binding.progressBar.visibility = View.GONE
-                    //Toast.makeText(this@DetailsActivity, it.name, Toast.LENGTH_LONG).show()
-
                     if (it.image != null) {
                         Glide.with(this)
                             .load(it.image)

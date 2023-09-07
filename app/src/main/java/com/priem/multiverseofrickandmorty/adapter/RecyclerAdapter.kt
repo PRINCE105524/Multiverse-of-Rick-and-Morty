@@ -15,8 +15,6 @@ import com.priem.multiverseofrickandmorty.models.characterlist.Result
 
 class RecyclerAdapter(private val context: Context, private val characterList: CharacterList?) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context),parent, false))
     }
@@ -44,7 +42,6 @@ class RecyclerAdapter(private val context: Context, private val characterList: C
         }
     }
 
-
     inner class ViewHolder(var listItemBinding: ListItemBinding): RecyclerView.ViewHolder(listItemBinding.root){
 
 
@@ -58,7 +55,5 @@ class RecyclerAdapter(private val context: Context, private val characterList: C
             listItemBinding.statusImageView.setImageResource(statusDotResource)
         }
     }
-
-
 
 }
